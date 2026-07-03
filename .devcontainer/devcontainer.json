@@ -4,7 +4,7 @@
   "service": "astro",
   "runServices": ["astro"],
   "workspaceFolder": "/app",
-  "postCreateCommand": "npm install",
+  "postStartCommand": "npm install",
   "remoteUser": "node",
   "customizations": {
     "vscode": {
