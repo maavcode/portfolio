@@ -1,13 +1,15 @@
 ---
-import Layout from "../layouts/Layout.astro";
-
-
+import Layout from "@/layouts/Layout.astro";
+import { LightPullThemeSwitcher } from "@/components/effects/LightPullThemeSwitcher";
 ---
 
 <Layout>
+  <LightPullThemeSwitcher client:load />
 
-	<div class="w-full h-8 bg-primary">
-
-	</div>
-
+  <section id="hero" class="h-[300vh] flex items-start justify-center pt-[40vh]">
+    <div class="text-center">
+      <h1 class="text-5xl font-bold mb-4">Mario Avila</h1>
+      <p class="text-xl text-text-muted">Full Stack Developer</p>
+    </div>
+  </section>
 </Layout>
