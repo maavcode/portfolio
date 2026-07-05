@@ -1,20 +1,15 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { LightPullThemeSwitcher } from "@/components/effects/LightPullThemeSwitcher";
-import { PaletteShowcase } from "@/components/effects/PaletteShowcase";
 ---
 
 <Layout>
   <LightPullThemeSwitcher client:load />
 
-  <main id="main-content" class="relative z-10">
-    <section id="hero" class="h-[300vh] flex items-start justify-center pt-[40vh]">
-      <div class="text-center">
-        <h1 class="text-5xl font-bold mb-4">Mario Avila</h1>
-        <p class="text-xl text-text-muted">Full Stack Developer</p>
-      </div>
-    </section>
-
-    <PaletteShowcase client:load />
-  </main>
+  <section id="hero" class="h-[300vh] flex items-start justify-center pt-[40vh]">
+    <div class="text-center">
+      <h1 class="text-5xl font-bold mb-4">Mario Avila</h1>
+      <p class="text-xl text-text-muted">Full Stack Developer</p>
+    </div>
+  </section>
 </Layout>
