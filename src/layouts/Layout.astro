@@ -1,17 +1,31 @@
 ---
-import '../styles/global.css'
+import "@/styles/global.css";
+import ThemeInit from "@/components/effects/ThemeInit.astro";
+import StarField from "@/components/effects/StarField.astro";
+import { ScrollProgress } from "@/components/effects/ScrollProgress";
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<slot/>
-	</body>
+  <head>
+    <ThemeInit />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Mario Avila</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="font-sans antialiased">
+    <ScrollProgress client:load />
+    <StarField />
+    <header></header>
+    <main>
+      <slot />
+    </main>
+    <footer></footer>
+  </body>
 </html>

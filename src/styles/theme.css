@@ -1,0 +1,47 @@
+[data-theme="night"] {
+  --color-bg-primary: #0a0a0a;
+  --color-bg-card: rgba(255, 255, 255, 0.05);
+  --color-text-primary: #fafafa;
+  --color-text-muted: #a1a1aa;
+  --color-accent: #ef4444;
+  --color-accent-glow: rgba(239, 68, 68, 0.3);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --star-color: 255 255 255;
+}
+
+[data-theme="day"] {
+  --color-bg-primary: #fef7ec;
+  --color-bg-card: rgba(255, 140, 50, 0.06);
+  --color-text-primary: #1c130d;
+  --color-text-muted: #8b6f5c;
+  --color-accent: #e07c2e;
+  --color-accent-glow: rgba(224, 124, 46, 0.3);
+  --color-border: rgba(180, 100, 30, 0.12);
+  --star-color: 120 170 255;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  transition: background-color 0.8s ease, color 0.8s ease;
+}
+
+[data-theme="night"] body {
+  background:
+    radial-gradient(ellipse 120% 50% at 50% 0%, rgba(30, 80, 160, 0.25) 0%, rgba(50, 100, 180, 0.1) 40%, transparent 70%),
+    radial-gradient(ellipse 120% 60% at 50% 100%, rgba(239, 68, 68, 0.15), transparent 70%),
+    var(--color-bg-primary);
+}
+
+[data-theme="day"] body {
+  background:
+    radial-gradient(ellipse 100% 50% at 50% 0%, rgba(224, 124, 46, 0.35) 0%, rgba(255, 180, 80, 0.15) 40%, transparent 70%),
+    radial-gradient(ellipse 60% 25% at 15% 100%, rgba(255, 200, 100, 0.12), transparent 50%),
+    radial-gradient(ellipse 60% 25% at 85% 100%, rgba(224, 124, 46, 0.1), transparent 50%),
+    linear-gradient(180deg, rgba(180, 210, 240, 0.12) 0%, transparent 35%),
+    var(--color-bg-primary);
+}
