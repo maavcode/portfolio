@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import { Home, User, Briefcase, Code2, Mail, Palette } from "lucide-react"
+import { Home, User, Briefcase, Code2, History, Mail, Palette } from "lucide-react"
 
 interface NavItem {
   name: string
@@ -13,6 +13,7 @@ const sections: NavItem[] = [
   { name: "About", url: "#about", icon: User },
   { name: "Projects", url: "#projects", icon: Briefcase },
   { name: "Stack", url: "#stack", icon: Code2 },
+  { name: "Experience", url: "#experience", icon: History },
   { name: "Contact", url: "#contact", icon: Mail },
 ]
 

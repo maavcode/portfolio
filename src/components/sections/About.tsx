@@ -1,6 +1,12 @@
-import { useRef } from "react"
-import { motion, useInView } from "framer-motion"
+import { useState, useEffect, useCallback, useRef } from "react"
+import { motion, useInView, AnimatePresence } from "framer-motion"
 import { ArrowUpRight } from "lucide-react"
+
+const placeholderImages = [
+  "https://picsum.photos/id/1/600/750",
+  "https://picsum.photos/id/64/600/750",
+  "https://picsum.photos/id/177/600/750",
+]
 
 const stats = [
   { label: "Years Experience", value: "3+" },
@@ -21,7 +27,25 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 }
 
-export function About() {
+interface AboutProps {
+  images?: string[]
+}
+
+export function About({ images = placeholderImages }: AboutProps) {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const imageCount = images.length
+  const hasMultiple = imageCount > 1
+
+  const nextImage = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % imageCount)
+  }, [imageCount])
+
+  useEffect(() => {
+    if (!hasMultiple) return
+    const timer = setInterval(nextImage, 3000)
+    return () => clearInterval(timer)
+  }, [hasMultiple, nextImage])
+
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
@@ -65,14 +89,52 @@ export function About() {
           }}
           variants={itemVariants}
         >
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span
-              className="text-6xl sm:text-7xl font-extrabold tracking-tight select-none"
-              style={{ color: "color-mix(in srgb, var(--color-accent) 20%, transparent)" }}
-            >
-              MA
-            </span>
-          </div>
+          {imageCount === 0 ? (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span
+                className="text-6xl sm:text-7xl font-extrabold tracking-tight select-none"
+                style={{ color: "color-mix(in srgb, var(--color-accent) 20%, transparent)" }}
+              >
+                MA
+              </span>
+            </div>
+          ) : (
+            <>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  initial={hasMultiple ? { opacity: 0, scale: 1.05 } : false as any}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.97 }}
+                  transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                  className="absolute inset-0"
+                >
+                  <img
+                    src={images[currentIndex]}
+                    alt={`Profile photo ${currentIndex + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+              </AnimatePresence>
+
+              {hasMultiple && (
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+                  {images.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setCurrentIndex(i)}
+                      className="h-2 rounded-full transition-all duration-300"
+                      style={{
+                        background: i === currentIndex ? "var(--color-accent)" : "color-mix(in srgb, var(--color-text-primary) 30%, transparent)",
+                        width: i === currentIndex ? "1.5rem" : "0.5rem",
+                      }}
+                      aria-label={`Go to image ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              )}
+            </>
+          )}
         </motion.div>
 
         <div className="flex flex-col gap-6">
