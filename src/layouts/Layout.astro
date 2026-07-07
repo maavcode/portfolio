@@ -3,6 +3,7 @@ import "@/styles/global.css";
 import ThemeInit from "@/components/effects/ThemeInit.astro";
 import StarField from "@/components/effects/StarField.astro";
 import { ScrollProgress } from "@/components/effects/ScrollProgress";
+import { Navbar } from "@/components/sections/Navbar";
 ---
 
 <html lang="en">
@@ -22,8 +23,8 @@ import { ScrollProgress } from "@/components/effects/ScrollProgress";
   <body class="font-sans antialiased">
     <ScrollProgress client:load />
     <StarField />
-    <header></header>
-    <main id="main-content" class="relative z-10">
+    <Navbar client:load />
+    <main id="main-content" class="relative z-10 pb-20 md:pb-0">
       <slot />
     </main>
     <footer></footer>
