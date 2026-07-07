@@ -4,6 +4,7 @@ import { ExternalLink, Code2 } from "lucide-react"
 
 const projects = [
   {
+    id: "portfolio",
     title: "Portfolio Web",
     description:
       "A personal portfolio built with Astro, React, Tailwind CSS, and Framer Motion. Features a day/night theme system, CSS star field, and draggable theme switcher.",
@@ -11,13 +12,7 @@ const projects = [
     links: { github: "https://github.com", live: "https://example.com" },
   },
   {
-    title: "Coming Soon",
-    description:
-      "A placeholder for future projects. More exciting work will appear here shortly.",
-    tags: ["React", "Node.js", "TypeScript"],
-    links: { github: "https://github.com", live: null },
-  },
-  {
+    id: "coming-soon-1",
     title: "Coming Soon",
     description:
       "A placeholder for future projects. More exciting work will appear here shortly.",
@@ -87,7 +82,7 @@ export function Projects() {
       >
         {projects.map((project) => (
           <motion.article
-            key={project.title}
+            key={project.id}
             className="group rounded-2xl overflow-hidden flex flex-col"
             style={{
               background: "color-mix(in srgb, var(--color-bg-card) 100%, transparent)",
