@@ -4,6 +4,7 @@ import ThemeInit from "@/components/effects/ThemeInit.astro";
 import StarField from "@/components/effects/StarField.astro";
 import { ScrollProgress } from "@/components/effects/ScrollProgress";
 import { Navbar } from "@/components/sections/Navbar";
+import { Footer } from "@/components/sections/Footer";
 ---
 
 <html lang="en">
@@ -24,9 +25,9 @@ import { Navbar } from "@/components/sections/Navbar";
     <ScrollProgress client:load />
     <StarField />
     <Navbar client:load />
-    <main id="main-content" class="relative z-10 pb-20 md:pb-0">
+    <main id="main-content" class="relative z-10">
       <slot />
     </main>
-    <footer></footer>
+    <Footer client:load />
   </body>
 </html>
