@@ -1,6 +1,7 @@
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
-import { Mail, MapPin, Code2, ExternalLink, Camera, Gamepad2, Send } from "lucide-react"
+import { Mail, MapPin, Send } from "lucide-react"
+import { FaGithub, FaLinkedin, FaInstagram, FaTwitch } from "react-icons/fa"
 
 const contactInfo = [
   { icon: Mail, title: "Email", description: "mario.aguilar.dev@hotmail.com" },
@@ -8,15 +9,36 @@ const contactInfo = [
 ]
 
 const socials = [
-  { name: "GitHub", icon: Code2, url: "https://github.com/maavcode" },
-  { name: "LinkedIn", icon: ExternalLink, url: "https://www.linkedin.com/in/mario-aguilar-avila" },
-  { name: "Instagram", icon: Camera, url: "https://www.instagram.com/maavcode/" },
-  { name: "Twitch", icon: Gamepad2, url: "https://www.twitch.tv/maavcode" },
+  { name: "GitHub", icon: FaGithub, url: "https://github.com/maavcode" },
+  { name: "LinkedIn", icon: FaLinkedin, url: "https://www.linkedin.com/in/mario-aguilar-avila" },
+  { name: "Instagram", icon: FaInstagram, url: "https://www.instagram.com/maavcode/" },
+  { name: "Twitch", icon: FaTwitch, url: "https://www.twitch.tv/maavcode" },
 ]
 
 export function Contact() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const form = e.currentTarget
+    const data = new FormData(form)
+    const name = data.get("name") as string
+    const email = data.get("email") as string
+    const subject = data.get("_subject") as string
+    const message = data.get("message") as string
+
+    const body = [
+      `From: ${name}`,
+      `Email: ${email}`,
+      "",
+      `Message:`,
+      message,
+    ].join("\n")
+
+    const mailto = `mailto:mario.aguilar.dev@hotmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    window.location.href = mailto
+  }
 
   return (
     <div ref={ref} className="w-full max-w-5xl mx-auto px-6">
@@ -74,9 +96,7 @@ export function Contact() {
             </p>
 
             <form
-              action="mailto:mario.aguilar.dev@hotmail.com"
-              method="GET"
-              encType="text/plain"
+              onSubmit={handleSubmit}
               className="space-y-5"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -107,7 +127,7 @@ export function Contact() {
               </div>
               <input
                 type="text"
-                name="subject"
+                name="_subject"
                 placeholder="Subject"
                 required
                 className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-all duration-300"
@@ -118,7 +138,7 @@ export function Contact() {
                 }}
               />
               <textarea
-                name="body"
+                name="message"
                 rows={6}
                 placeholder="Your Message"
                 required
@@ -208,14 +228,15 @@ export function Contact() {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 rounded-xl transition-all duration-300"
+                  className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300"
                   style={{
                     background: "color-mix(in srgb, var(--color-accent) 10%, transparent)",
                     color: "var(--color-text-muted)",
                     border: "1px solid transparent",
                   }}
                 >
-                  <social.icon className="w-5 h-5" />
+                  <social.icon className="w-4 h-4" />
+                  {social.name}
                 </a>
               ))}
             </div>

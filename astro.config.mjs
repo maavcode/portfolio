@@ -11,5 +11,8 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      include: ['astro/runtime/client/dev-toolbar/entrypoint.js'],
+    },
   },
 });
