@@ -14,8 +14,8 @@ const itemVariants = {
 }
 
 export function Hero() {
-  const scrollToContact = () => {
-    const el = document.getElementById("contact")
+  const scrollToProjects = () => {
+    const el = document.getElementById("projects")
     if (el) el.scrollIntoView({ behavior: "smooth" })
   }
 
@@ -64,7 +64,7 @@ export function Hero() {
       </motion.p>
 
       <motion.button
-        onClick={scrollToContact}
+        onClick={scrollToProjects}
         className="flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold cursor-pointer transition-colors duration-300"
         style={{
           background: "var(--color-accent)",
@@ -74,7 +74,7 @@ export function Hero() {
         whileTap={{ scale: 0.97 }}
         variants={itemVariants}
       >
-        Get in touch
+        View my projects
       </motion.button>
     </motion.div>
   )

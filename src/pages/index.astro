@@ -3,6 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import { LightPullThemeSwitcher } from "@/components/effects/LightPullThemeSwitcher";
 import { ScrollIndicator } from "@/components/effects/ScrollIndicator";
 import { Hero } from "@/components/sections/Hero";
+import { About } from "@/components/sections/About";
 ---
 
 <Layout>
@@ -18,12 +19,9 @@ import { Hero } from "@/components/sections/Hero";
 
   <section
     id="about"
-    class="min-h-screen flex items-center justify-center px-6"
+    class="min-h-screen flex items-center justify-center py-24"
   >
-    <div class="max-w-2xl text-center">
-      <h2 class="text-3xl font-bold mb-4">About</h2>
-      <p class="text-lg text-text-muted">Coming soon...</p>
-    </div>
+    <About client:load />
   </section>
 
   <section
