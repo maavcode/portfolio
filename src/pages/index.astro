@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import { LightPullThemeSwitcher } from "@/components/effects/LightPullThemeSwitcher";
 import { ScrollIndicator } from "@/components/effects/ScrollIndicator";
+import { Hero } from "@/components/sections/Hero";
 ---
 
 <Layout>
@@ -9,12 +10,9 @@ import { ScrollIndicator } from "@/components/effects/ScrollIndicator";
 
   <section
     id="home"
-    class="relative min-h-screen flex items-center justify-center"
+    class="relative min-h-screen flex items-center justify-center overflow-hidden"
   >
-    <div class="text-center">
-      <h1 class="text-5xl font-bold mb-4">Mario Avila</h1>
-      <p class="text-xl text-text-muted">Full Stack Developer</p>
-    </div>
+    <Hero client:load />
     <ScrollIndicator client:only="react" />
   </section>
 
