@@ -6,6 +6,7 @@ import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Projects } from "@/components/sections/Projects";
 import { Skills } from "@/components/sections/Skills";
+import { Contact } from "@/components/sections/Contact";
 ---
 
 <Layout>
@@ -42,11 +43,8 @@ import { Skills } from "@/components/sections/Skills";
 
   <section
     id="contact"
-    class="min-h-screen flex items-center justify-center px-6"
+    class="min-h-screen flex items-center justify-center py-24"
   >
-    <div class="max-w-2xl text-center">
-      <h2 class="text-3xl font-bold mb-4">Contact</h2>
-      <p class="text-lg text-text-muted">Coming soon...</p>
-    </div>
+    <Contact client:load />
   </section>
 </Layout>
