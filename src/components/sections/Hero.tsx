@@ -1,5 +1,6 @@
 import { motion } from "framer-motion"
 import type { HeroSection } from "../../data/types"
+import { Button } from "../shared/Button"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -74,19 +75,11 @@ export function Hero({ data, className }: Props) {
         {content.description}
       </motion.p>
 
-      <motion.button
-        onClick={scrollToProjects}
-        className="flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold cursor-pointer transition-colors duration-300"
-        style={{
-          background: "var(--color-accent)",
-          color: "#fff",
-        }}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.97 }}
-        variants={itemVariants}
-      >
-        {content.primaryButton.label}
-      </motion.button>
+      <motion.div variants={itemVariants}>
+        <Button size="lg" onClick={scrollToProjects}>
+          {content.primaryButton.label}
+        </Button>
+      </motion.div>
     </motion.div>
   )
 }

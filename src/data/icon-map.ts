@@ -8,6 +8,7 @@ import {
   MapPin,
   Send,
   ArrowUpRight,
+  ExternalLink,
 } from "lucide-react"
 import { FaGithub, FaLinkedin, FaInstagram, FaTwitch } from "react-icons/fa"
 
@@ -21,6 +22,7 @@ export const iconMap = {
   MapPin,
   Send,
   ArrowUpRight,
+  ExternalLink,
   FaGithub,
   FaLinkedin,
   FaInstagram,

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion"
 import type { SkillsSection } from "../../data/types"
+import { SectionHeading } from "../shared/SectionHeading"
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -39,24 +40,7 @@ export function Skills({ data, className }: Props) {
 
   return (
     <div className={`w-full max-w-4xl mx-auto px-6 ${className ?? ""}`}>
-      <div className="mb-16 text-center">
-        <h2
-          className="text-3xl sm:text-4xl font-bold tracking-tight mb-4"
-          style={{ color: "var(--color-text-primary)" }}
-        >
-          {content.title}
-        </h2>
-        <div
-          className="w-12 h-1 rounded-full mb-6 mx-auto"
-          style={{ background: "var(--color-accent)" }}
-        />
-        <p
-          className="text-base max-w-xl mx-auto"
-          style={{ color: "var(--color-text-muted)" }}
-        >
-          {content.description}
-        </p>
-      </div>
+      <SectionHeading title={content.title} description={content.description} centered />
 
       <div className="space-y-10">
         {categories.map((category) => (

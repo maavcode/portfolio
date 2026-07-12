@@ -3,6 +3,8 @@ import { motion, useInView } from "framer-motion"
 import { Send } from "lucide-react"
 import { iconMap } from "../../data/icon-map"
 import type { ContactSection } from "../../data/types"
+import { SectionHeading } from "../shared/SectionHeading"
+import { Button } from "../shared/Button"
 
 const demo: ContactSection = {
   title: "Lorem ipsum",
@@ -52,29 +54,7 @@ export function Contact({ data, className }: Props) {
 
   return (
     <div ref={ref} className={`w-full max-w-5xl mx-auto px-6 ${className ?? ""}`}>
-      <motion.div
-        className="flex flex-col items-center text-center mb-12"
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h2
-          className="text-3xl sm:text-4xl font-bold tracking-tight mb-4"
-          style={{ color: "var(--color-text-primary)" }}
-        >
-          {content.title}
-        </h2>
-        <div
-          className="w-12 h-1 rounded-full mb-6"
-          style={{ background: "var(--color-accent)" }}
-        />
-        <p
-          className="text-base max-w-xl"
-          style={{ color: "var(--color-text-muted)" }}
-        >
-          {content.description}
-        </p>
-      </motion.div>
+      <SectionHeading title={content.title} description={content.description} />
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
         <motion.div
@@ -159,17 +139,9 @@ export function Contact({ data, className }: Props) {
                 }}
               />
               <div className="flex justify-center pt-2">
-                <button
-                  type="submit"
-                  className="inline-flex items-center gap-2 px-8 py-3 rounded-full text-sm font-semibold transition-all duration-300"
-                  style={{
-                    background: "var(--color-accent)",
-                    color: "#fff",
-                  }}
-                >
-                  <Send className="w-4 h-4" />
+                <Button type="submit" size="xl" icon="Send" className="gap-2 transition-all">
                   Send Message
-                </button>
+                </Button>
               </div>
             </form>
           </div>

@@ -1,6 +1,8 @@
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import type { ExperienceSection } from "../../data/types"
+import { SectionHeading } from "../shared/SectionHeading"
+import { Tag } from "../shared/Tag"
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -48,29 +50,7 @@ export function Experience({ data, className }: Props) {
 
   return (
     <div ref={ref} className={`w-full max-w-4xl mx-auto px-6 ${className ?? ""}`}>
-      <motion.div
-        className="flex flex-col items-center text-center mb-12"
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h2
-          className="text-3xl sm:text-4xl font-bold tracking-tight mb-4"
-          style={{ color: "var(--color-text-primary)" }}
-        >
-          {content.title}
-        </h2>
-        <div
-          className="w-12 h-1 rounded-full mb-6"
-          style={{ background: "var(--color-accent)" }}
-        />
-        <p
-          className="text-base max-w-xl"
-          style={{ color: "var(--color-text-muted)" }}
-        >
-          {content.description}
-        </p>
-      </motion.div>
+      <SectionHeading title={content.title} description={content.description} />
 
       <motion.div
         variants={staggerContainer}
@@ -156,16 +136,7 @@ export function Experience({ data, className }: Props) {
 
               <div className="mt-4 flex flex-wrap gap-2">
                 {exp.techUsed.map((tech) => (
-                  <span
-                    key={tech}
-                    className="text-xs px-2.5 py-0.5 rounded-full font-mono"
-                    style={{
-                      background: "color-mix(in srgb, var(--color-accent) 10%, transparent)",
-                      color: "var(--color-accent)",
-                    }}
-                  >
-                    {tech}
-                  </span>
+                  <Tag key={tech}>{tech}</Tag>
                 ))}
               </div>
             </div>

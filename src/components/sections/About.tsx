@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react"
 import { motion, useInView, AnimatePresence } from "framer-motion"
 import { ArrowUpRight } from "lucide-react"
 import type { AboutSection } from "../../data/types"
+import { SectionHeading } from "../shared/SectionHeading"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -57,29 +58,7 @@ export function About({ data, className }: Props) {
 
   return (
     <div ref={ref} className={`w-full max-w-5xl mx-auto px-6 ${className ?? ""}`}>
-      <motion.div
-        className="flex flex-col items-center text-center mb-12"
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h2
-          className="text-3xl sm:text-4xl font-bold tracking-tight mb-4"
-          style={{ color: "var(--color-text-primary)" }}
-        >
-          {content.title}
-        </h2>
-        <div
-          className="w-12 h-1 rounded-full mb-6"
-          style={{ background: "var(--color-accent)" }}
-        />
-        <p
-          className="text-base max-w-xl"
-          style={{ color: "var(--color-text-muted)" }}
-        >
-          {content.description}
-        </p>
-      </motion.div>
+      <SectionHeading title={content.title} description={content.description} />
 
       <motion.div
         className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center"
