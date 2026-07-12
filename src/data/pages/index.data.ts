@@ -23,9 +23,9 @@ export const data: HomePage = {
       "/images/viaje-3.jpeg",
     ],
     stats: [
-      { label: "Years Experience", value: "3+" },
-      { label: "Projects", value: "10+" },
       { label: "Technologies", value: "15+" },
+      { label: "Projects", value: "5+" },
+      { label: "Conferences", value: "3+" },
     ],
   },
   projectsSection: {

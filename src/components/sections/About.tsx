@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from "react"
 import { motion, useInView, AnimatePresence } from "framer-motion"
-import { ArrowUpRight } from "lucide-react"
 import type { AboutSection } from "../../data/types"
 import { SectionHeading } from "../shared/SectionHeading"
+import { Button } from "../shared/Button"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -161,16 +161,11 @@ export function About({ data, className }: Props) {
             ))}
           </motion.div>
 
-          <motion.a
-            href="#contact"
-            className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-300 w-fit"
-            style={{ color: "var(--color-accent)" }}
-            whileHover={{ gap: "0.625rem" }}
-            variants={itemVariants}
-          >
-            Get in touch
-            <ArrowUpRight className="w-4 h-4" />
-          </motion.a>
+          <motion.div variants={itemVariants}>
+            <Button variant="accent" size="lg" href="/cv-spanish.pdf" icon="ArrowUpRight">
+              View my Resume
+            </Button>
+          </motion.div>
         </div>
       </motion.div>
     </div>
