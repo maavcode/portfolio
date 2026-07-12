@@ -1,4 +1,5 @@
 import { motion } from "framer-motion"
+import type { HeroSection } from "../../data/types"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -13,7 +14,21 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 }
 
-export function Hero() {
+const demo: HeroSection = {
+  badge: "Lorem ipsum",
+  title: "Lorem ipsum dolor sit amet",
+  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  primaryButton: { label: "Lorem ipsum", href: "#" },
+}
+
+interface Props {
+  data?: HeroSection
+  className?: string
+}
+
+export function Hero({ data, className }: Props) {
+  const content = data || demo
+
   const scrollToProjects = () => {
     const el = document.getElementById("projects")
     if (el) el.scrollIntoView({ behavior: "smooth" })
@@ -21,22 +36,24 @@ export function Hero() {
 
   return (
     <motion.div
-      className="relative z-10 flex flex-col items-center gap-5 px-4"
+      className={`relative z-10 flex flex-col items-center gap-5 px-4 ${className ?? ""}`}
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
-      <motion.span
-        className="inline-block px-4 py-1.5 rounded-full text-sm font-medium tracking-wide"
-        style={{
-          background: "color-mix(in srgb, var(--color-accent) 12%, transparent)",
-          border: "1px solid color-mix(in srgb, var(--color-accent) 25%, transparent)",
-          color: "var(--color-accent)",
-        }}
-        variants={itemVariants}
-      >
-        Full Stack Developer
-      </motion.span>
+      {content.badge && (
+        <motion.span
+          className="inline-block px-4 py-1.5 rounded-full text-sm font-medium tracking-wide"
+          style={{
+            background: "color-mix(in srgb, var(--color-accent) 12%, transparent)",
+            border: "1px solid color-mix(in srgb, var(--color-accent) 25%, transparent)",
+            color: "var(--color-accent)",
+          }}
+          variants={itemVariants}
+        >
+          {content.badge}
+        </motion.span>
+      )}
 
       <motion.h1
         className="text-5xl sm:text-6xl lg:text-6xl font-extrabold text-center tracking-tight"
@@ -46,7 +63,7 @@ export function Hero() {
         }}
         variants={itemVariants}
       >
-        Mario Aguilar Avila
+        {content.title}
       </motion.h1>
 
       <motion.p
@@ -54,13 +71,7 @@ export function Hero() {
         style={{ color: "var(--color-text-muted)" }}
         variants={itemVariants}
       >
-        I build{" "}
-        <span
-          className="bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-text-muted)] bg-clip-text text-transparent font-semibold"
-        >
-          full-stack web applications
-        </span>{" "}
-        with modern technologies.
+        {content.description}
       </motion.p>
 
       <motion.button
@@ -74,7 +85,7 @@ export function Hero() {
         whileTap={{ scale: 0.97 }}
         variants={itemVariants}
       >
-        View my projects
+        {content.primaryButton.label}
       </motion.button>
     </motion.div>
   )

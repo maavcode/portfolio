@@ -1,18 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react"
 import { motion, useInView, AnimatePresence } from "framer-motion"
 import { ArrowUpRight } from "lucide-react"
-
-const placeholderImages = [
-  "https://picsum.photos/id/1/600/750",
-  "https://picsum.photos/id/64/600/750",
-  "https://picsum.photos/id/177/600/750",
-]
-
-const stats = [
-  { label: "Years Experience", value: "3+" },
-  { label: "Projects", value: "10+" },
-  { label: "Technologies", value: "15+" },
-]
+import type { AboutSection } from "../../data/types"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -27,11 +16,28 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 }
 
-interface AboutProps {
-  images?: string[]
+const demo: AboutSection = {
+  title: "Lorem ipsum",
+  description: "Lorem ipsum dolor sit amet",
+  paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  images: ["https://picsum.photos/id/1/600/750"],
+  stats: [
+    { label: "Lorem", value: "0+" },
+    { label: "Ipsum", value: "0+" },
+    { label: "Dolor", value: "0+" },
+  ],
 }
 
-export function About({ images = placeholderImages }: AboutProps) {
+interface Props {
+  data?: AboutSection
+  className?: string
+}
+
+export function About({ data, className }: Props) {
+  const content = data || demo
+  const images = content.images
+  const stats = content.stats
+
   const [currentIndex, setCurrentIndex] = useState(0)
   const imageCount = images.length
   const hasMultiple = imageCount > 1
@@ -50,7 +56,7 @@ export function About({ images = placeholderImages }: AboutProps) {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <div ref={ref} className="w-full max-w-5xl mx-auto px-6">
+    <div ref={ref} className={`w-full max-w-5xl mx-auto px-6 ${className ?? ""}`}>
       <motion.div
         className="flex flex-col items-center text-center mb-12"
         initial={{ opacity: 0, y: 20 }}
@@ -61,7 +67,7 @@ export function About({ images = placeholderImages }: AboutProps) {
           className="text-3xl sm:text-4xl font-bold tracking-tight mb-4"
           style={{ color: "var(--color-text-primary)" }}
         >
-          About Me
+          {content.title}
         </h2>
         <div
           className="w-12 h-1 rounded-full mb-6"
@@ -71,7 +77,7 @@ export function About({ images = placeholderImages }: AboutProps) {
           className="text-base max-w-xl"
           style={{ color: "var(--color-text-muted)" }}
         >
-          Get to know me better
+          {content.description}
         </p>
       </motion.div>
 
@@ -143,10 +149,7 @@ export function About({ images = placeholderImages }: AboutProps) {
               className="text-base leading-relaxed"
               style={{ color: "var(--color-text-muted)" }}
             >
-              I'm a Full Stack Developer with a passion for building modern,
-              performant web applications. I specialize in React, Node.js, and
-              cloud technologies, and I'm always eager to learn and take on new
-              challenges.
+              {content.paragraph}
             </p>
           </motion.div>
 

@@ -1,32 +1,42 @@
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
-import { Mail, MapPin, Send } from "lucide-react"
-import { FaGithub, FaLinkedin, FaInstagram, FaTwitch } from "react-icons/fa"
+import { Send } from "lucide-react"
+import { iconMap } from "../../data/icon-map"
+import type { ContactSection } from "../../data/types"
 
-const contactInfo = [
-  { icon: Mail, title: "Email", description: "mario.aguilar.dev@hotmail.com" },
-  { icon: MapPin, title: "Location", description: "Spain" },
-]
+const demo: ContactSection = {
+  title: "Lorem ipsum",
+  description: "Lorem ipsum dolor sit amet",
+  contactInfo: [
+    { icon: "Mail", title: "Email", description: "lorem@ipsum.com" },
+    { icon: "MapPin", title: "Location", description: "Lorem" },
+  ],
+  socials: [
+    { name: "GitHub", icon: "FaGithub", url: "#" },
+  ],
+}
 
-const socials = [
-  { name: "GitHub", icon: FaGithub, url: "https://github.com/maavcode" },
-  { name: "LinkedIn", icon: FaLinkedin, url: "https://www.linkedin.com/in/mario-aguilar-avila" },
-  { name: "Instagram", icon: FaInstagram, url: "https://www.instagram.com/maavcode/" },
-  { name: "Twitch", icon: FaTwitch, url: "https://www.twitch.tv/maavcode" },
-]
+interface Props {
+  data?: ContactSection
+  className?: string
+}
 
-export function Contact() {
+export function Contact({ data, className }: Props) {
+  const content = data || demo
+  const contactInfo = content.contactInfo
+  const socials = content.socials
+
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const form = e.currentTarget
-    const data = new FormData(form)
-    const name = data.get("name") as string
-    const email = data.get("email") as string
-    const subject = data.get("_subject") as string
-    const message = data.get("message") as string
+    const formData = new FormData(form)
+    const name = formData.get("name") as string
+    const email = formData.get("email") as string
+    const subject = formData.get("_subject") as string
+    const message = formData.get("message") as string
 
     const body = [
       `From: ${name}`,
@@ -41,7 +51,7 @@ export function Contact() {
   }
 
   return (
-    <div ref={ref} className="w-full max-w-5xl mx-auto px-6">
+    <div ref={ref} className={`w-full max-w-5xl mx-auto px-6 ${className ?? ""}`}>
       <motion.div
         className="flex flex-col items-center text-center mb-12"
         initial={{ opacity: 0, y: 20 }}
@@ -52,7 +62,7 @@ export function Contact() {
           className="text-3xl sm:text-4xl font-bold tracking-tight mb-4"
           style={{ color: "var(--color-text-primary)" }}
         >
-          Contact Me
+          {content.title}
         </h2>
         <div
           className="w-12 h-1 rounded-full mb-6"
@@ -62,12 +72,11 @@ export function Contact() {
           className="text-base max-w-xl"
           style={{ color: "var(--color-text-muted)" }}
         >
-          Have a question or want to work together? Feel free to reach out.
+          {content.description}
         </p>
       </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-        {/* Form */}
         <motion.div
           className="lg:col-span-3"
           initial={{ opacity: 0, y: 30 }}
@@ -166,48 +175,49 @@ export function Contact() {
           </div>
         </motion.div>
 
-        {/* Contact Info */}
         <motion.div
           className="lg:col-span-2 flex flex-col gap-6"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          {contactInfo.map((item) => (
-            <div
-              key={item.title}
-              className="rounded-xl p-5 transition-all duration-300"
-              style={{
-                background: "color-mix(in srgb, var(--color-bg-card) 100%, transparent)",
-                border: "1px solid var(--color-border)",
-              }}
-            >
-              <div className="flex items-center gap-4">
-                <div
-                  className="p-3 rounded-xl"
-                  style={{
-                    background: "color-mix(in srgb, var(--color-accent) 15%, transparent)",
-                    color: "var(--color-accent)",
-                  }}
-                >
-                  <item.icon className="w-5 h-5" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <h4
-                    className="text-sm font-semibold mb-0.5"
-                    style={{ color: "var(--color-text-primary)" }}
+          {contactInfo.map((item) => {
+            const ContactIcon = iconMap[item.icon]
+            return (
+              <div
+                key={item.title}
+                className="rounded-xl p-5 transition-all duration-300"
+                style={{
+                  background: "color-mix(in srgb, var(--color-bg-card) 100%, transparent)",
+                  border: "1px solid var(--color-border)",
+                }}
+              >
+                <div className="flex items-center gap-4">
+                  <div
+                    className="p-3 rounded-xl"
+                    style={{
+                      background: "color-mix(in srgb, var(--color-accent) 15%, transparent)",
+                      color: "var(--color-accent)",
+                    }}
                   >
-                    {item.title}
-                  </h4>
-                  <p className="text-sm truncate" style={{ color: "var(--color-text-muted)" }}>
-                    {item.description}
-                  </p>
+                    <ContactIcon className="w-5 h-5" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h4
+                      className="text-sm font-semibold mb-0.5"
+                      style={{ color: "var(--color-text-primary)" }}
+                    >
+                      {item.title}
+                    </h4>
+                    <p className="text-sm truncate" style={{ color: "var(--color-text-muted)" }}>
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
 
-          {/* Socials */}
           <div
             className="rounded-xl p-5"
             style={{
@@ -222,23 +232,26 @@ export function Contact() {
               Connect with me
             </h4>
             <div className="flex flex-wrap gap-3">
-              {socials.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300"
-                  style={{
-                    background: "color-mix(in srgb, var(--color-accent) 10%, transparent)",
-                    color: "var(--color-text-muted)",
-                    border: "1px solid transparent",
-                  }}
-                >
-                  <social.icon className="w-4 h-4" />
-                  {social.name}
-                </a>
-              ))}
+              {socials.map((social) => {
+                const SocialIcon = iconMap[social.icon]
+                return (
+                  <a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300"
+                    style={{
+                      background: "color-mix(in srgb, var(--color-accent) 10%, transparent)",
+                      color: "var(--color-text-muted)",
+                      border: "1px solid transparent",
+                    }}
+                  >
+                    <SocialIcon className="w-4 h-4" />
+                    {social.name}
+                  </a>
+                )
+              })}
             </div>
           </div>
         </motion.div>

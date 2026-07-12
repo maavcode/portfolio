@@ -1,64 +1,5 @@
 import { motion } from "framer-motion"
-
-const DI = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons"
-const SI = "https://cdn.simpleicons.org"
-
-const categories = [
-  {
-    category: "Languages",
-    skills: [
-      { name: "TypeScript", icon: `${DI}/typescript/typescript-original.svg` },
-      { name: "JavaScript", icon: `${DI}/javascript/javascript-original.svg` },
-      { name: "PHP", icon: `${DI}/php/php-original.svg` },
-      { name: "C#", icon: `${DI}/csharp/csharp-original.svg` },
-      { name: "Java", icon: `${DI}/java/java-original.svg` },
-      { name: "Kotlin", icon: `${DI}/kotlin/kotlin-original.svg` },
-      { name: "Python", icon: `${DI}/python/python-original.svg` },
-      { name: "SQL", icon: `${SI}/mysql/4479A1` },
-      { name: "HTML5", icon: `${DI}/html5/html5-original.svg` },
-      { name: "CSS3", icon: `${DI}/css3/css3-original.svg` },
-    ],
-  },
-  {
-    category: "Frameworks & Libraries",
-    skills: [
-      { name: "React", icon: `${DI}/react/react-original.svg` },
-      { name: "Astro", icon: `${SI}/astro/FF5D01` },
-      { name: "Next.js", icon: `${SI}/nextdotjs/white` },
-      { name: "Laravel", icon: `${DI}/laravel/laravel-original.svg` },
-      { name: "Spring", icon: `${DI}/spring/spring-original.svg` },
-      { name: ".NET", icon: `${SI}/dotnet/512BD4` },
-      { name: "Node.js", icon: `${DI}/nodejs/nodejs-original.svg` },
-      { name: "Tailwind CSS", icon: `${DI}/tailwindcss/tailwindcss-original.svg` },
-      { name: "Framer Motion", icon: `${SI}/framer/0055FF` },
-      { name: "Android Studio", icon: `${DI}/androidstudio/androidstudio-original.svg` },
-      { name: "Apache Maven", icon: `${DI}/maven/maven-original.svg` },
-    ],
-  },
-  {
-    category: "Databases",
-    skills: [
-      { name: "PostgreSQL", icon: `${DI}/postgresql/postgresql-original.svg` },
-      { name: "MySQL", icon: `${DI}/mysql/mysql-original.svg` },
-      { name: "MariaDB", icon: `${SI}/mariadb/003545` },
-      { name: "MongoDB", icon: `${DI}/mongodb/mongodb-original.svg` },
-      { name: "SQLite", icon: `${DI}/sqlite/sqlite-original.svg` },
-    ],
-  },
-  {
-    category: "Tools & Platforms",
-    skills: [
-      { name: "Git", icon: `${DI}/git/git-original.svg` },
-      { name: "Docker", icon: `${DI}/docker/docker-original.svg` },
-      { name: "AWS", icon: `${DI}/amazonwebservices/amazonwebservices-original-wordmark.svg` },
-      { name: "Nginx", icon: `${DI}/nginx/nginx-original.svg` },
-      { name: "Linux", icon: `${DI}/linux/linux-original.svg` },
-      { name: "Grafana", icon: `${SI}/grafana/F46800` },
-      { name: "k6", icon: `${SI}/k6/7D64FF` },
-      { name: "SEO", icon: `${SI}/google/4285F4` },
-    ],
-  },
-]
+import type { SkillsSection } from "../../data/types"
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -73,15 +14,37 @@ const staggerItem = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } },
 }
 
-export function Skills() {
+const demo: SkillsSection = {
+  title: "Lorem ipsum",
+  description: "Lorem ipsum dolor sit amet",
+  categories: [
+    {
+      category: "Lorem",
+      skills: [
+        { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+        { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" },
+      ],
+    },
+  ],
+}
+
+interface Props {
+  data?: SkillsSection
+  className?: string
+}
+
+export function Skills({ data, className }: Props) {
+  const content = data || demo
+  const categories = content.categories
+
   return (
-    <div className="w-full max-w-4xl mx-auto px-6">
+    <div className={`w-full max-w-4xl mx-auto px-6 ${className ?? ""}`}>
       <div className="mb-16 text-center">
         <h2
           className="text-3xl sm:text-4xl font-bold tracking-tight mb-4"
           style={{ color: "var(--color-text-primary)" }}
         >
-          Skills & Expertise
+          {content.title}
         </h2>
         <div
           className="w-12 h-1 rounded-full mb-6 mx-auto"
@@ -91,7 +54,7 @@ export function Skills() {
           className="text-base max-w-xl mx-auto"
           style={{ color: "var(--color-text-muted)" }}
         >
-          A collection of technologies I'm proficient with, from languages to frameworks and tools
+          {content.description}
         </p>
       </div>
 

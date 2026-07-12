@@ -1,25 +1,7 @@
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { ExternalLink, Code2 } from "lucide-react"
-
-const projects = [
-  {
-    id: "portfolio",
-    title: "Portfolio Web",
-    description:
-      "A personal portfolio built with Astro, React, Tailwind CSS, and Framer Motion. Features a day/night theme system, CSS star field, and draggable theme switcher.",
-    tags: ["Astro", "React", "Tailwind CSS", "Framer Motion"],
-    links: { github: "https://github.com", live: "https://example.com" },
-  },
-  {
-    id: "coming-soon-1",
-    title: "Coming Soon",
-    description:
-      "A placeholder for future projects. More exciting work will appear here shortly.",
-    tags: ["React", "Node.js", "TypeScript"],
-    links: { github: "https://github.com", live: null },
-  },
-]
+import type { ProjectsSection } from "../../data/types"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -41,15 +23,34 @@ const initialLetters = (title: string) =>
     .join("")
     .slice(0, 2)
 
-export function Projects() {
+const demo: ProjectsSection = {
+  title: "Lorem ipsum",
+  description: "Lorem ipsum dolor sit amet",
+  projects: [
+    {
+      id: "demo-1",
+      title: "Lorem Project",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      tags: ["Lorem", "Ipsum"],
+      links: { github: "#", live: null },
+    },
+  ],
+}
+
+interface Props {
+  data?: ProjectsSection
+  className?: string
+}
+
+export function Projects({ data, className }: Props) {
+  const content = data || demo
+  const projects = content.projects
+
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <div
-      ref={ref}
-      className="w-full max-w-5xl mx-auto px-6"
-    >
+    <div ref={ref} className={`w-full max-w-5xl mx-auto px-6 ${className ?? ""}`}>
       <motion.div
         className="flex flex-col items-center text-center mb-12"
         initial={{ opacity: 0, y: 20 }}
@@ -60,7 +61,7 @@ export function Projects() {
           className="text-3xl sm:text-4xl font-bold tracking-tight mb-4"
           style={{ color: "var(--color-text-primary)" }}
         >
-          Projects
+          {content.title}
         </h2>
         <div
           className="w-12 h-1 rounded-full mb-6"
@@ -70,7 +71,7 @@ export function Projects() {
           className="text-base max-w-xl"
           style={{ color: "var(--color-text-muted)" }}
         >
-          A selection of projects I've built and contributed to.
+          {content.description}
         </p>
       </motion.div>
 
