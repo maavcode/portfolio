@@ -20,7 +20,7 @@ const itemVariants = {
 const demo: AboutSection = {
   title: "Lorem ipsum",
   description: "Lorem ipsum dolor sit amet",
-  paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  paragraphs: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit."],
   images: ["https://picsum.photos/id/1/600/750"],
   stats: [
     { label: "Lorem", value: "0+" },
@@ -123,13 +123,16 @@ export function About({ data, className }: Props) {
         </motion.div>
 
         <div className="flex flex-col gap-6">
-          <motion.div variants={itemVariants}>
-            <p
-              className="text-base leading-relaxed"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              {content.paragraph}
-            </p>
+          <motion.div variants={itemVariants} className="space-y-4">
+            {content.paragraphs.map((p, i) => (
+              <p
+                key={i}
+                className="text-base leading-relaxed"
+                style={{ color: "var(--color-text-muted)" }}
+              >
+                {p}
+              </p>
+            ))}
           </motion.div>
 
           <motion.div

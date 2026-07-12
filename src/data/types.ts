@@ -31,7 +31,7 @@ interface HeroSection {
 interface AboutSection {
   title: string
   description: string
-  paragraph: string
+  paragraphs: string[]
   images: string[]
   stats: Stat[]
 }

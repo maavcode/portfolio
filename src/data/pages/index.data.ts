@@ -2,20 +2,22 @@ import type { HomePage } from "../types"
 
 export const data: HomePage = {
   title: "Mario Avila",
-  description:
-    "Full Stack Developer specializing in modern web technologies.",
+    description:
+      "Full Stack Developer passionate about building modern applications, APIs, and integrations.",
   heroSection: {
     badge: "Full Stack Developer",
     title: "Mario Aguilar Avila",
     description:
-      "I build full-stack web applications with modern technologies.",
+      "I build full-stack applications with modern technologies, from web interfaces to REST APIs and system integrations.",
     primaryButton: { label: "View my projects", href: "#projects" },
   },
   aboutSection: {
     title: "About Me",
     description: "Get to know me better",
-    paragraph:
-      "I'm a Full Stack Developer with a passion for building modern, performant web applications. I specialize in React, Node.js, and cloud technologies, and I'm always eager to learn and take on new challenges.",
+    paragraphs: [
+      "Full Stack Developer with experience in building web applications, REST APIs, and system integrations. Passionate about clean code, performance optimization, and best practices.",
+      "Self-driven and always eager to learn new technologies. I'm looking for an opportunity where I can contribute, keep growing, and work as part of a team.",
+    ],
     images: [
       "/images/mario-1.jpg",
       "/images/viaje-1.jpeg",
@@ -39,17 +41,33 @@ export const data: HomePage = {
           "A personal portfolio built with Astro, React, Tailwind CSS, and Framer Motion. Features a day/night theme system, CSS star field, and draggable theme switcher.",
         tags: ["Astro", "React", "Tailwind CSS", "Framer Motion"],
         links: {
-          github: "https://github.com",
-          live: "https://example.com",
+          github: "https://github.com/maavcode/portfolio",
+          live: null,
         },
+      },
+      {
+        id: "store-desktop",
+        title: "Store Manager (Desktop)",
+        description:
+          "Desktop application built with .NET, C# and Entity Framework for my final degree project. Manages inventory, sales and suppliers with a local database.",
+        tags: [".NET", "C#", "Entity Framework", "WPF"],
+        links: { github: "https://github.com/maavcode/project-VeMoGO", live: null },
+      },
+      {
+        id: "store-mobile",
+        title: "Store Manager (Mobile)",
+        description:
+          "Mobile application developed with Kotlin and Spring Boot for my final degree project. Features MVVM architecture, REST API integration and cloud-ready deployment.",
+        tags: ["Kotlin", "Spring Boot", "MVVM", "REST API"],
+        links: { github: "https://github.com/maavcode/project-VeMoGO", live: null },
       },
       {
         id: "coming-soon-1",
         title: "Coming Soon",
         description:
-          "A placeholder for future projects. More exciting work will appear here shortly.",
+          "More exciting projects are on the way. Stay tuned for future updates.",
         tags: ["React", "Node.js", "TypeScript"],
-        links: { github: "https://github.com", live: null },
+        links: { github: null, live: null },
       },
     ],
   },
@@ -138,7 +156,7 @@ export const data: HomePage = {
   contactSection: {
     title: "Contact Me",
     description:
-      "Have a question or want to work together? Feel free to reach out.",
+      "Have a project in mind or want to discuss an opportunity? Let's talk.",
     contactInfo: [
       {
         icon: "Mail",
