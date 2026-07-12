@@ -1,25 +1,9 @@
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
-import { ExternalLink, Code2 } from "lucide-react"
-
-const projects = [
-  {
-    id: "portfolio",
-    title: "Portfolio Web",
-    description:
-      "A personal portfolio built with Astro, React, Tailwind CSS, and Framer Motion. Features a day/night theme system, CSS star field, and draggable theme switcher.",
-    tags: ["Astro", "React", "Tailwind CSS", "Framer Motion"],
-    links: { github: "https://github.com", live: "https://example.com" },
-  },
-  {
-    id: "coming-soon-1",
-    title: "Coming Soon",
-    description:
-      "A placeholder for future projects. More exciting work will appear here shortly.",
-    tags: ["React", "Node.js", "TypeScript"],
-    links: { github: "https://github.com", live: null },
-  },
-]
+import type { ProjectsSection } from "../../data/types"
+import { SectionHeading } from "../shared/SectionHeading"
+import { Button } from "../shared/Button"
+import { Tag } from "../shared/Tag"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -41,38 +25,35 @@ const initialLetters = (title: string) =>
     .join("")
     .slice(0, 2)
 
-export function Projects() {
+const demo: ProjectsSection = {
+  title: "Lorem ipsum",
+  description: "Lorem ipsum dolor sit amet",
+  projects: [
+    {
+      id: "demo-1",
+      title: "Lorem Project",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      tags: ["Lorem", "Ipsum"],
+      links: { github: "#", live: null },
+    },
+  ],
+}
+
+interface Props {
+  data?: ProjectsSection
+  className?: string
+}
+
+export function Projects({ data, className }: Props) {
+  const content = data || demo
+  const projects = content.projects
+
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <div
-      ref={ref}
-      className="w-full max-w-5xl mx-auto px-6"
-    >
-      <motion.div
-        className="flex flex-col items-center text-center mb-12"
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h2
-          className="text-3xl sm:text-4xl font-bold tracking-tight mb-4"
-          style={{ color: "var(--color-text-primary)" }}
-        >
-          Projects
-        </h2>
-        <div
-          className="w-12 h-1 rounded-full mb-6"
-          style={{ background: "var(--color-accent)" }}
-        />
-        <p
-          className="text-base max-w-xl"
-          style={{ color: "var(--color-text-muted)" }}
-        >
-          A selection of projects I've built and contributed to.
-        </p>
-      </motion.div>
+    <div ref={ref} className={`w-full max-w-5xl mx-auto px-6 ${className ?? ""}`}>
+      <SectionHeading title={content.title} description={content.description} />
 
       <motion.div
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -113,34 +94,14 @@ export function Projects() {
                 }}
               >
                 {project.links.github && (
-                  <a
-                    href={project.links.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold transition-transform duration-300 hover:scale-105"
-                    style={{
-                      background: "var(--color-accent)",
-                      color: "#fff",
-                    }}
-                  >
-                    <Code2 className="w-4 h-4" />
+                  <Button variant="accent" size="md" icon="Code2" href={project.links.github}>
                     Github
-                  </a>
+                  </Button>
                 )}
                 {project.links.live && (
-                  <a
-                    href={project.links.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold transition-transform duration-300 hover:scale-105"
-                    style={{
-                      background: "color-mix(in srgb, var(--color-text-primary) 15%, transparent)",
-                      color: "var(--color-text-primary)",
-                    }}
-                  >
-                    <ExternalLink className="w-4 h-4" />
+                  <Button variant="ghost" size="md" icon="ExternalLink" href={project.links.live}>
                     Live Demo
-                  </a>
+                  </Button>
                 )}
               </div>
             </div>
@@ -161,50 +122,20 @@ export function Projects() {
 
               <div className="flex flex-wrap gap-1.5 mt-auto">
                 {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-xs px-2.5 py-1 rounded-full"
-                    style={{
-                      background:
-                        "color-mix(in srgb, var(--color-accent) 10%, transparent)",
-                      color: "var(--color-accent)",
-                    }}
-                  >
-                    {tag}
-                  </span>
+                  <Tag key={tag}>{tag}</Tag>
                 ))}
               </div>
 
               <div className="flex md:hidden justify-between gap-3 pt-2">
                 {project.links.github && (
-                  <a
-                    href={project.links.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-full text-xs font-semibold transition-transform duration-300 active:scale-95"
-                    style={{
-                      background: "var(--color-accent)",
-                      color: "#fff",
-                    }}
-                  >
-                    <Code2 className="w-3.5 h-3.5" />
+                  <Button variant="accent" size="sm" icon="Code2" href={project.links.github} className="flex-1 justify-center">
                     Github
-                  </a>
+                  </Button>
                 )}
                 {project.links.live && (
-                  <a
-                    href={project.links.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-full text-xs font-semibold transition-transform duration-300 active:scale-95"
-                    style={{
-                      background: "color-mix(in srgb, var(--color-text-primary) 15%, transparent)",
-                      color: "var(--color-text-primary)",
-                    }}
-                  >
-                    <ExternalLink className="w-3.5 h-3.5" />
+                  <Button variant="ghost" size="sm" icon="ExternalLink" href={project.links.live} className="flex-1 justify-center">
                     Live Demo
-                  </a>
+                  </Button>
                 )}
               </div>
             </div>

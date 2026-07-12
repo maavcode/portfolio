@@ -1,18 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from "react"
 import { motion, useInView, AnimatePresence } from "framer-motion"
-import { ArrowUpRight } from "lucide-react"
-
-const placeholderImages = [
-  "https://picsum.photos/id/1/600/750",
-  "https://picsum.photos/id/64/600/750",
-  "https://picsum.photos/id/177/600/750",
-]
-
-const stats = [
-  { label: "Years Experience", value: "3+" },
-  { label: "Projects", value: "10+" },
-  { label: "Technologies", value: "15+" },
-]
+import type { AboutSection } from "../../data/types"
+import { SectionHeading } from "../shared/SectionHeading"
+import { Button } from "../shared/Button"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -27,11 +17,28 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 }
 
-interface AboutProps {
-  images?: string[]
+const demo: AboutSection = {
+  title: "Lorem ipsum",
+  description: "Lorem ipsum dolor sit amet",
+  paragraphs: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit."],
+  images: ["https://picsum.photos/id/1/600/750"],
+  stats: [
+    { label: "Lorem", value: "0+" },
+    { label: "Ipsum", value: "0+" },
+    { label: "Dolor", value: "0+" },
+  ],
 }
 
-export function About({ images = placeholderImages }: AboutProps) {
+interface Props {
+  data?: AboutSection
+  className?: string
+}
+
+export function About({ data, className }: Props) {
+  const content = data || demo
+  const images = content.images
+  const stats = content.stats
+
   const [currentIndex, setCurrentIndex] = useState(0)
   const imageCount = images.length
   const hasMultiple = imageCount > 1
@@ -50,30 +57,8 @@ export function About({ images = placeholderImages }: AboutProps) {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <div ref={ref} className="w-full max-w-5xl mx-auto px-6">
-      <motion.div
-        className="flex flex-col items-center text-center mb-12"
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h2
-          className="text-3xl sm:text-4xl font-bold tracking-tight mb-4"
-          style={{ color: "var(--color-text-primary)" }}
-        >
-          About Me
-        </h2>
-        <div
-          className="w-12 h-1 rounded-full mb-6"
-          style={{ background: "var(--color-accent)" }}
-        />
-        <p
-          className="text-base max-w-xl"
-          style={{ color: "var(--color-text-muted)" }}
-        >
-          Get to know me better
-        </p>
-      </motion.div>
+    <div ref={ref} className={`w-full max-w-5xl mx-auto px-6 ${className ?? ""}`}>
+      <SectionHeading title={content.title} description={content.description} />
 
       <motion.div
         className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center"
@@ -138,16 +123,16 @@ export function About({ images = placeholderImages }: AboutProps) {
         </motion.div>
 
         <div className="flex flex-col gap-6">
-          <motion.div variants={itemVariants}>
-            <p
-              className="text-base leading-relaxed"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              I'm a Full Stack Developer with a passion for building modern,
-              performant web applications. I specialize in React, Node.js, and
-              cloud technologies, and I'm always eager to learn and take on new
-              challenges.
-            </p>
+          <motion.div variants={itemVariants} className="space-y-4">
+            {content.paragraphs.map((p, i) => (
+              <p
+                key={i}
+                className="text-base leading-relaxed"
+                style={{ color: "var(--color-text-muted)" }}
+              >
+                {p}
+              </p>
+            ))}
           </motion.div>
 
           <motion.div
@@ -179,16 +164,11 @@ export function About({ images = placeholderImages }: AboutProps) {
             ))}
           </motion.div>
 
-          <motion.a
-            href="#contact"
-            className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-300 w-fit"
-            style={{ color: "var(--color-accent)" }}
-            whileHover={{ gap: "0.625rem" }}
-            variants={itemVariants}
-          >
-            Get in touch
-            <ArrowUpRight className="w-4 h-4" />
-          </motion.a>
+          <motion.div variants={itemVariants}>
+            <Button variant="accent" size="lg" href="/cv-spanish.pdf" icon="ArrowUpRight">
+              View my Resume
+            </Button>
+          </motion.div>
         </div>
       </motion.div>
     </div>

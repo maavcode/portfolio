@@ -5,6 +5,7 @@ import StarField from "@/components/effects/StarField.astro";
 import { ScrollProgress } from "@/components/effects/ScrollProgress";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
+import { navData, footerData } from "@/data/navs.data";
 ---
 
 <html lang="en">
@@ -24,10 +25,10 @@ import { Footer } from "@/components/sections/Footer";
   <body class="font-sans antialiased">
     <ScrollProgress client:load />
     <StarField />
-    <Navbar client:load />
+    <Navbar data={navData} client:load />
     <main id="main-content" class="relative z-10">
       <slot />
     </main>
-    <Footer client:load />
+    <Footer data={footerData} client:load />
   </body>
 </html>

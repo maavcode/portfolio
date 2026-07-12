@@ -8,6 +8,7 @@ import { Projects } from "@/components/sections/Projects";
 import { Skills } from "@/components/sections/Skills";
 import { Experience } from "@/components/sections/Experience";
 import { Contact } from "@/components/sections/Contact";
+import { indexData } from "@/data/pages.data";
 ---
 
 <Layout>
@@ -17,7 +18,7 @@ import { Contact } from "@/components/sections/Contact";
     id="home"
     class="relative min-h-screen flex items-center justify-center overflow-hidden"
   >
-    <Hero client:load />
+    <Hero data={indexData.heroSection} client:load />
     <ScrollIndicator client:only="react" />
   </section>
 
@@ -25,34 +26,34 @@ import { Contact } from "@/components/sections/Contact";
     id="about"
     class="min-h-screen flex items-center justify-center py-24"
   >
-    <About client:load />
+    <About data={indexData.aboutSection} client:load />
   </section>
 
   <section
     id="projects"
     class="min-h-screen flex items-center justify-center py-24"
   >
-    <Projects client:load />
+    <Projects data={indexData.projectsSection} client:load />
   </section>
 
   <section
     id="stack"
     class="min-h-screen flex items-center justify-center py-24"
   >
-    <Skills client:load />
+    <Skills data={indexData.skillsSection} client:load />
   </section>
 
   <section
     id="experience"
     class="min-h-screen flex items-center justify-center py-24"
   >
-    <Experience client:load />
+    <Experience data={indexData.experienceSection} client:load />
   </section>
 
   <section
     id="contact"
     class="min-h-screen flex items-center justify-center py-24"
   >
-    <Contact client:load />
+    <Contact data={indexData.contactSection} client:load />
   </section>
 </Layout>
