@@ -1,0 +1,59 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { LightPullThemeSwitcher } from "@/components/effects/LightPullThemeSwitcher";
+import { ScrollIndicator } from "@/components/effects/ScrollIndicator";
+import { Hero } from "@/components/sections/Hero";
+import { About } from "@/components/sections/About";
+import { Projects } from "@/components/sections/Projects";
+import { Skills } from "@/components/sections/Skills";
+import { Experience } from "@/components/sections/Experience";
+import { Contact } from "@/components/sections/Contact";
+import { indexData } from "@/data/pages.data";
+---
+
+<Layout>
+  <LightPullThemeSwitcher client:load />
+
+  <section
+    id="home"
+    class="relative min-h-screen flex items-center justify-center overflow-hidden"
+  >
+    <Hero data={indexData.heroSection} client:load />
+    <ScrollIndicator client:only="react" />
+  </section>
+
+  <section
+    id="about"
+    class="min-h-screen flex items-center justify-center py-24"
+  >
+    <About data={indexData.aboutSection} client:load />
+  </section>
+
+  <section
+    id="projects"
+    class="min-h-screen flex items-center justify-center py-24"
+  >
+    <Projects data={indexData.projectsSection} client:load />
+  </section>
+
+  <section
+    id="stack"
+    class="min-h-screen flex items-center justify-center py-24"
+  >
+    <Skills data={indexData.skillsSection} client:load />
+  </section>
+
+  <section
+    id="experience"
+    class="min-h-screen flex items-center justify-center py-24"
+  >
+    <Experience data={indexData.experienceSection} client:load />
+  </section>
+
+  <section
+    id="contact"
+    class="min-h-screen flex items-center justify-center py-24"
+  >
+    <Contact data={indexData.contactSection} client:load />
+  </section>
+</Layout>

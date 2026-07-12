@@ -1,0 +1,11 @@
+services:
+  astro:
+    build:
+      context: ..
+      dockerfile: .docker/Dockerfile
+      target: dev
+    volumes:
+      - ../:/app
+    ports:
+      - "${ASTRO_PORT:-4321}:${ASTRO_PORT:-4321}"
+    command: "sleep infinity"
