@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import { Palette } from "lucide-react"
 import { iconMap } from "../../data/icon-map"
 import type { NavbarSection } from "../../data/types"
 
@@ -92,17 +91,6 @@ export function Navbar({ data, className }: Props) {
             </button>
           )
         })}
-
-        <a
-          href="/fonts-palette"
-          className="relative cursor-pointer text-sm font-semibold px-4 py-2 rounded-full transition-colors"
-          style={{ color: "var(--color-text-muted)" }}
-        >
-          <span className="hidden sm:inline">Palette</span>
-          <span className="sm:hidden">
-            <Palette className="w-5 h-5" />
-          </span>
-        </a>
       </div>
     </div>
   )
