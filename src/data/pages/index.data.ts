@@ -17,9 +17,10 @@ export const data: HomePage = {
     paragraph:
       "I'm a Full Stack Developer with a passion for building modern, performant web applications. I specialize in React, Node.js, and cloud technologies, and I'm always eager to learn and take on new challenges.",
     images: [
-      "https://picsum.photos/id/1/600/750",
-      "https://picsum.photos/id/64/600/750",
-      "https://picsum.photos/id/177/600/750",
+      "/images/mario-1.jpg",
+      "/images/viaje-1.jpeg",
+      "/images/viaje-2.jpeg",
+      "/images/viaje-3.jpeg",
     ],
     stats: [
       { label: "Years Experience", value: "3+" },
