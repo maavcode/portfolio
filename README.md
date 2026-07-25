@@ -1,35 +1,46 @@
-# Portfolio
+# Astro Starter Kit: Basics
 
-Personal portfolio built with [Astro](https://astro.build), [React](https://react.dev), [Tailwind CSS](https://tailwindcss.com) v4 and [Framer Motion](https://motion.dev).
+```sh
+npm create astro@latest -- --template basics
+```
 
-## Features
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-- Day/night theme with draggable theme switcher
-- CSS-only star field animation
-- Responsive pill navbar with active section tracking
-- Project showcase with GitHub links
-- Skills grid with CDN icons
-- Experience timeline
-- Contact form via mailto
+## 🚀 Project Structure
 
-## Commands
+Inside of your Astro project, you'll see the following folders and files:
 
-| Command | Action |
-| :------ | :----- |
-| `npm install` | Install dependencies |
-| `npm run dev` | Start dev server at `localhost:4321` |
-| `npm run build` | Build to `./dist/` |
-| `npm run preview` | Preview production build |
+```text
+/
+├── public/
+│   └── favicon.svg
+├── src
+│   ├── assets
+│   │   └── astro.svg
+│   ├── components
+│   │   └── Welcome.astro
+│   ├── layouts
+│   │   └── Layout.astro
+│   └── pages
+│       └── index.astro
+└── package.json
+```
 
-## Tech Stack
+To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
 
-- **Framework:** Astro 6
-- **UI:** React 19
-- **Styling:** Tailwind CSS v4
-- **Animations:** Framer Motion
-- **Icons:** Lucide React, React Icons
-- **Dev icons:** Devicon / SimpleIcons CDN
+## 🧞 Commands
 
-## License
+All commands are run from the root of the project, from a terminal:
 
-[MIT](LICENSE)
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
+
+## 👀 Want to learn more?
+
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
